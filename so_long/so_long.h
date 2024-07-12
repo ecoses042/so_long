@@ -23,7 +23,6 @@ typedef struct s_map_var{
     int exit;
     int score;
     int start;
-
 }t_map_var;
 
 typedef struct s_queue{
