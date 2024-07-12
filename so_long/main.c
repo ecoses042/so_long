@@ -10,20 +10,17 @@
 //print error when map is not there
 //print error if map cannot be done
 
-#include <stdio.h>
-
 int main(int ac, char **av) 
 {
-    t_MapInfo *Map_array;
+    t_MapInfo Map_array;
 
     if (ac < 2)
         return (1);
     if (is_invalid_file(av[1]))
-        printf("error\n");
-    Map_array->map = open_map(av[1]);
-    /*if (is_invalid_map(Map_array))
-    {
-
-    }*/
+        return (print_error(INVALID_FILE));
+    
+    Map_array.map = open_map(av[1]);
+    if (is_invalid_map(&Map_array))
+        return (print_error(INVALID_MAP));
     return (0);
 }

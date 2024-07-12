@@ -1,6 +1,5 @@
 #include "../so_long.h"
 
-#include <stdio.h>
 //open argument file and return 2-d array of char.
 char **open_map(char *av)
 {
@@ -16,12 +15,13 @@ char **open_map(char *av)
     while (line)
     {
         line = get_next_line(fd);
-        printf("%s\n",line);
-        if (line == NULL)
+        if (!line)
             break;
-        lines = ft_strjoin(lines, line);
+        if (!lines)
+            lines = ft_strdup(line);
+        else
+            lines = ft_strjoin(lines, line);
         free(line);
     }
-    close(fd);
     return (ft_split(lines, '\n'));
 }

@@ -15,8 +15,10 @@ SRC = main.c\
 	utility/ft_strjoin.c\
 	utility/ft_split.c\
 	manage_input/open_map.c\
-	manage_input/check_invalid_file.c\
-	
+	utility/check_map_utils.c\
+	utility/queue.c\
+	manage_input/check_invalid_map.c\
+	utility/ft_strdup.c\
 
 # Object files
 OBJ = $(SRC:.c=.o)
