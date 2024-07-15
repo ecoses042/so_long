@@ -19,6 +19,9 @@ SRC = main.c\
 	utility/queue.c\
 	manage_input/check_invalid_map.c\
 	utility/ft_strdup.c\
+	utility/check_path_utils.c\
+	manage_input/check_invalid_path.c\
+	utility/ft_free.c\
 
 # Object files
 OBJ = $(SRC:.c=.o)

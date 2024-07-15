@@ -1,8 +1,8 @@
 #include "../so_long.h"
 
-size_t	ft_strlen(const	char *a)
+int	ft_strlen(const	char *a)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (a[i])

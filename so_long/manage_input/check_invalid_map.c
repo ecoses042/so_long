@@ -9,9 +9,9 @@
 //if more than 1 of them is false, return true
 bool is_invalid_shape(t_MapInfo *Map_array)
 {
-    size_t i;
-    size_t current_len;
-    size_t len;
+    int i;
+    int current_len;
+    int len;
 
     i = 0;
     len = ft_strlen(Map_array->map[i]);
@@ -31,8 +31,8 @@ bool is_invalid_shape(t_MapInfo *Map_array)
 #include <stdio.h>
 bool is_invalid_fence(t_MapInfo *Map_array)
 {
-    size_t i;
-    size_t j;
+    int i;
+    int j;
 
     i = -1;
     while (++i <= Map_array->height)
@@ -52,8 +52,8 @@ bool is_invalid_fence(t_MapInfo *Map_array)
 bool is_invalid_goal(t_MapInfo *Map_array)
 {
     t_map_var check;
-    size_t i;
-    size_t j;
+    int i;
+    int j;
 
     i = -1;
     init_map_var(&check);
@@ -65,7 +65,7 @@ bool is_invalid_goal(t_MapInfo *Map_array)
             update_map_var(Map_array->map[i][j], &check);
         }
     }
-    if (check.exit == 0 || check.score == 0 || check.start == 0 || check.start > 1)
+    if (check.exit != 1 || check.score == 0 || check.start != 1)
         return (true);
     return (false);
 }
@@ -76,17 +76,13 @@ bool is_invalid_goal(t_MapInfo *Map_array)
 bool is_invalid_map(t_MapInfo *Map_array)
 {
     if (is_invalid_shape(Map_array))
-        return (true);
-    printf("shape passed\n");
+        return (print_error("map shape error\n"));
     if (is_invalid_fence(Map_array))
-        return (true);
-    printf("fence passed\n");
+        return (print_error("fence not found\n"));
     if (is_invalid_goal(Map_array))
-        return (true);
-    printf("goal passed\n");
-    if (is_impossible_map(Map_array))
-        return (true);
-    printf("all test passed. file verified\n");
+        return (print_error("goal not found\n"));
+    if (is_invalid_path(Map_array))
+        return (print_error("path not found\n"));
     return (false);
     //dfs search to check map
 }

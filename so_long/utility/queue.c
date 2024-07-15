@@ -1,10 +1,18 @@
 #include "../so_long.h"
 
-int isEmpty(t_queue *q) 
+bool queue_isEmpty(t_queue *q) 
 {
     return (q->front == NULL);
 }
 
+void init_queue(t_queue *q)
+{
+    q->first = 0;
+    q->second = 0;
+    q->next = NULL;
+    q->front = NULL;
+    q->rear = NULL;
+}
 void enqueue(t_queue *q, int first, int second) 
 {
     t_queue *newNode;
@@ -18,10 +26,12 @@ void enqueue(t_queue *q, int first, int second)
     newNode->first = first;
     newNode->second = second;
     newNode->next = NULL;
-
     if (q->rear == NULL)
-        q->front = q->rear = newNode;
-    else 
+    {
+        q->front = newNode;
+        q->rear = newNode;
+    }
+    else
     {
         q->rear->next = newNode;
         q->rear = newNode;
@@ -32,7 +42,7 @@ int dequeue(t_queue *q, int *first, int *second)
 {
     t_queue *temp;
 
-    if (isEmpty(q))
+    if (queue_isEmpty(q))
         return (0);
     temp = q->front;
     *first = temp->first;

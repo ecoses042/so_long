@@ -18,9 +18,13 @@ int main(int ac, char **av)
         return (1);
     if (is_invalid_file(av[1]))
         return (print_error(INVALID_FILE));
-    
     Map_array.map = open_map(av[1]);
     if (is_invalid_map(&Map_array))
+    {
+        ft_free_Map_Info(&Map_array);
         return (print_error(INVALID_MAP));
+    }
+    print_error("valid map indeed\n");
+    ft_free_Map_Info(&Map_array);
     return (0);
 }
