@@ -22,6 +22,7 @@ SRC = main.c\
 	utility/check_path_utils.c\
 	manage_input/check_invalid_path.c\
 	utility/ft_free.c\
+	manage_map/manage_window.c\
 
 # Object files
 OBJ = $(SRC:.c=.o)

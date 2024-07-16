@@ -44,6 +44,8 @@ bool is_invalid_path(t_MapInfo *Map_array)
         print_error("cannot find the starting point\n");
         ft_free_Map_Info(Map_array);
     }
+    Map_array->px = i;
+    Map_array->py = j;
     init_queue(&find_exit);
     enqueue(&find_exit, i, j);
     return (bfs(Map_array, &find_exit, &check_condition));

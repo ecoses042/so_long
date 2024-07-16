@@ -11,9 +11,16 @@
 #define INVALID_FILE "File Invalid\n"
 #define INVALID_MAP "Check your map file\n"
 #define ALLOC_FAIL "Allocation failed\n"
+#define MAP_SIZE 50
 //struct for storing map related information
 
 typedef struct s_MapInfo{
+    void *mlx;
+    void *win;
+    int move;
+    int px;
+    int py;
+    int score_left;
     int height;
     int width;
     char **map;
@@ -68,7 +75,8 @@ void ft_free_queue(t_queue *q);
 //error function
 bool   print_error(char *status);
 
-
+//window related fucntions
+void manage_window(t_MapInfo *map);
 
 
 #endif

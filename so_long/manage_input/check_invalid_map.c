@@ -65,6 +65,7 @@ bool is_invalid_goal(t_MapInfo *Map_array)
             update_map_var(Map_array->map[i][j], &check);
         }
     }
+    Map_array->score_left = check.score;
     if (check.exit != 1 || check.score == 0 || check.start != 1)
         return (true);
     return (false);

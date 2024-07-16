@@ -29,6 +29,7 @@ void init_check_path(t_MapInfo *Map)
     int j;
 
     i = -1;
+    Map->move = 0;
     Map->check_path = malloc(sizeof(char *) * (Map->height + 1));
     if (!Map->check_path)
         return ;

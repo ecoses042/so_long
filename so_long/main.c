@@ -25,6 +25,7 @@ int main(int ac, char **av)
         return (print_error(INVALID_MAP));
     }
     print_error("valid map indeed\n");
+    manage_window(&Map_array);
     ft_free_Map_Info(&Map_array);
     return (0);
 }
