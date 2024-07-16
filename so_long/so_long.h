@@ -12,9 +12,14 @@
 #define INVALID_MAP "Check your map file\n"
 #define ALLOC_FAIL "Allocation failed\n"
 #define MAP_SIZE 50
+#define FORWARD 1
+#define LEFT 2
+#define BACK 3
+#define RIGHT 4
 //struct for storing map related information
 
 typedef struct s_MapInfo{
+    bool endcondition;
     void *mlx;
     void *win;
     int move;
@@ -68,7 +73,8 @@ bool check_current(t_MapInfo *Map, t_map_var *check_condition, int i, int j);
 void init_check_path(t_MapInfo *Map);
 void enqueue_possible_cord(t_MapInfo *Map,t_queue *find_exit, t_queue cord, t_map_var *condition);
 void init_queue(t_queue *q);
-
+bool is_outside(t_MapInfo *Map, int x, int y);
+void init_Map_Info(t_MapInfo *Map);
 //allocated memory free
 void ft_free_Map_Info(t_MapInfo *Map);
 void ft_free_queue(t_queue *q);
@@ -77,6 +83,11 @@ bool   print_error(char *status);
 
 //window related fucntions
 void manage_window(t_MapInfo *map);
+void set_event(t_MapInfo *map);
+void check_window(t_MapInfo *map, t_queue *cord);
 
+//movement utility functions
+int is_move_key(int key);
+bool is_movable(t_MapInfo *map,int key);
 
 #endif

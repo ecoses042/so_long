@@ -18,6 +18,7 @@ int main(int ac, char **av)
         return (1);
     if (is_invalid_file(av[1]))
         return (print_error(INVALID_FILE));
+    init_Map_Info(&Map_array);
     Map_array.map = open_map(av[1]);
     if (is_invalid_map(&Map_array))
     {

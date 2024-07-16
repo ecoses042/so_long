@@ -23,6 +23,9 @@ SRC = main.c\
 	manage_input/check_invalid_path.c\
 	utility/ft_free.c\
 	manage_map/manage_window.c\
+	manage_map/action.c\
+	utility/check_available_move.c\
+	utility/init_Map_Info.c\
 
 # Object files
 OBJ = $(SRC:.c=.o)

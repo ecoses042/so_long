@@ -46,17 +46,6 @@ void init_check_path(t_MapInfo *Map)
     }
 }
 
-bool is_outside(t_MapInfo *Map, int x, int y)
-{
-    int height;
-    int width;
-
-    height = Map->height;
-    width = Map->width;
-    if (!(x <= height && x > 0) && !(y <= width && y > 0))
-        return (true);
-    return (Map->map[x][y] == '1');
-}
 
 bool is_checked(t_MapInfo *Map, int x, int y)
 {
