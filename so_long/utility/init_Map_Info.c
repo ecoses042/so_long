@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_map_info.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msong <msong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/16 19:51:21 by msong             #+#    #+#             */
+/*   Updated: 2024/07/16 20:06:46 by msong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../so_long.h"
 
-void init_Map_Info(t_MapInfo *Map)
+void	init_map_info(t_mapi *map)
 {
-    Map->endcondition = false;
-    Map->move = 0;
-    Map->px = 0;
-    Map->py = 0;
-    Map->score_left = 0;
-    Map->height = 0;
-    Map->width = 0;
+	map->exit = false;
+	map->endcondition = false;
+	map->move = 0;
+	map->px = 0;
+	map->py = 0;
+	map->score_left = 0;
+	map->height = 0;
+	map->width = 0;
 }

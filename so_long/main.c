@@ -1,32 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msong <msong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/16 19:23:06 by msong             #+#    #+#             */
+/*   Updated: 2024/07/16 19:23:50 by msong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "so_long.h"
-/*int main(int ac, char **av)
+
+int	main(int ac, char **av)
 {
-    if (check_input_error(ac, &av))
-        return (1);
-    return (0);
-}*/
+	t_mapi	map_array;
 
-
-//print error when map is not there
-//print error if map cannot be done
-
-int main(int ac, char **av) 
-{
-    t_MapInfo Map_array;
-
-    if (ac < 2)
-        return (1);
-    if (is_invalid_file(av[1]))
-        return (print_error(INVALID_FILE));
-    init_Map_Info(&Map_array);
-    Map_array.map = open_map(av[1]);
-    if (is_invalid_map(&Map_array))
-    {
-        ft_free_Map_Info(&Map_array);
-        return (print_error(INVALID_MAP));
-    }
-    print_error("valid map indeed\n");
-    manage_window(&Map_array);
-    ft_free_Map_Info(&Map_array);
-    return (0);
+	if (ac < 2)
+		return (1);
+	if (is_invalid_file(av[1]))
+		return (print_error(INVALID_FILE));
+	init_map_info(&map_array);
+	map_array.map = open_map(av[1]);
+	if (is_invalid_map(&map_array))
+	{
+		ft_free_map_info(&map_array);
+		return (1);
+	}
+	manage_window(&map_array);
+	ft_free_map_info(&map_array);
+	return (0);
 }

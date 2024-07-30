@@ -1,76 +1,80 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_path_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msong <msong@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/16 19:48:55 by msong             #+#    #+#             */
+/*   Updated: 2024/07/16 20:05:56 by msong            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "../so_long.h"
 
-//true if conditions are not met.
-//false if conditions are met
-bool dfs_end(t_map_var *param)
+bool	dfs_end(t_mapv *param)
 {
-    return (!param->exit && !param->score);
+	return (!param->exit && !param->score);
 }
 
-bool check_current(t_MapInfo *Map, t_map_var *check_condition, int i, int j)
+bool	check_current(t_mapi *map, t_mapv *check_in, int i, int j)
 {
-    if (Map->check_path[i][j] != '1')
-    {
-        if (Map->map[i][j] == 'C')
-            check_condition->score += 1;
-        else if (Map->map[i][j] == 'P')
-            check_condition->start += 1;
-        else if (Map->map[i][j] == 'E')
-            check_condition->exit += 1;
-        Map->check_path[i][j] = '1';
-        return (false);
-    }
-    return (true);
+	if (map->check_path[i][j] == '1')
+		return (true);
+	if (map->map[i][j] == 'C')
+		check_in->score += 1;
+	else if (map->map[i][j] == 'P')
+		check_in->start += 1;
+	else if (map->map[i][j] == 'E')
+		check_in->exit += 1;
+	map->check_path[i][j] = '1';
+	return (false);
 }
 
-void init_check_path(t_MapInfo *Map)
+bool	is_checked(t_mapi *map, int x, int y)
 {
-    int i;
-    int j;
-
-    i = -1;
-    Map->move = 0;
-    Map->check_path = malloc(sizeof(char *) * (Map->height + 1));
-    if (!Map->check_path)
-        return ;
-    while (++i <= Map->height + 1)
-    {
-        j = -1;
-        Map->check_path[i] = malloc(sizeof(char *) * (Map->width + 1));
-        if (!Map->check_path[i] )
-            return ;
-        while (++j <= Map->width + 1)
-        {
-            Map->check_path[i][j] = 0;
-        }
-    }
+	return (map->check_path[x][y] == '1' || map->map[x][y] == '1');
 }
 
-
-bool is_checked(t_MapInfo *Map, int x, int y)
+void	init_check_path(t_mapi *map)
 {
-    return (Map->check_path[x][y] == '1' || Map->map[x][y] == '1');
+	int	i;
+	int	j;
+
+	i = -1;
+	map->move = 0;
+	map->check_path = malloc(sizeof(char *) * (map->height + 2));
+	if (!map->check_path)
+		return ;
+	while (++i <= map->height)
+	{
+		j = -1;
+		map->check_path[i] = malloc(sizeof(char) * (map->width + 2));
+		if (!map->check_path[i])
+			return ;
+		while (++j <= map->width)
+			map->check_path[i][j] = 0;
+	}
+	map->check_path[map->height + 1] = NULL;
 }
 
-void enqueue_possible_cord(t_MapInfo *Map,t_queue *find_exit, t_queue cord, t_map_var *condition)
+void	put_poss_cord(t_mapi *map, t_queue *exit, t_queue cord, t_mapv *in)
 {
-    int change_first;
-    int change_second;
-    t_queue change_cord;
+	int		dx;
+	int		dy;
+	t_queue	change_cord;
 
-    init_queue(&change_cord);
-    enqueue(&change_cord, -1, 0);
-    enqueue(&change_cord, 1, 0);
-    enqueue(&change_cord, 0, -1);
-    enqueue(&change_cord, 0, 1);
-    while (!queue_isEmpty(&change_cord))
-    {
-        dequeue(&change_cord, &change_first, &change_second);
-        change_first += cord.first;
-        change_second += cord.second;
-        if (!is_outside(Map, change_first, change_second) 
-        && !check_current(Map, condition, change_first, change_second))
-            enqueue(find_exit, change_first, change_second);
-    }
-    ft_free_queue(&change_cord);
+	init_queue(&change_cord);
+	enqueue(&change_cord, -1, 0);
+	enqueue(&change_cord, 1, 0);
+	enqueue(&change_cord, 0, -1);
+	enqueue(&change_cord, 0, 1);
+	while (!queue_isempty(&change_cord))
+	{
+		dequeue(&change_cord, &dx, &dy);
+		dx += cord.first;
+		dy += cord.second;
+		if (!is_outside(map, dx, dy) && !check_current(map, in, dx, dy))
+			enqueue(exit, dx, dy);
+	}
+	ft_free_queue(&change_cord);
 }
