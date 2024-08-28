@@ -17,14 +17,17 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include "gnl/get_next_line.h"
-
 # define INVALID_FILE "Error\nFile Invalid\n"
 # define ALLOC_FAIL "Error\nAllocation failed\n"
 # define INVALID_SHAPE "Error\nmap shape error\n"
 # define INVALID_FENCE "Error\nfence not found\n"
 # define INVALID_GOAL "Error\ngoal not found\n"
 # define INVALID_PATH "Error\npath not found\n"
+# define MLX_ERR "Error\nmlx return void\n"
+# define INVALID_CHAR "Error\ninvalid char in the map file\n"
 # define MAP_SIZE 50
+# define HEIGHT_LIMIT 26
+# define WIDTH_LIMIT 51
 # define FORWARD 1
 # define LEFT 2
 # define BACK 3
@@ -83,7 +86,7 @@ void	enqueue(t_queue *q, int first, int second);
 bool	queue_isempty(t_queue *q);
 char	*ft_strdup(const char *src);
 void	init_mapv(t_mapv *var);
-bool	dfs_end(t_mapv *param);
+bool	dfs_end(t_mapv *param, t_mapi *map);
 bool	check_current(t_mapi *map, t_mapv *check_condition, int i, int j);
 void	init_check_path(t_mapi *map);
 void	put_poss_cord(t_mapi *map, t_queue *exit, t_queue cord, t_mapv *in);
@@ -91,6 +94,7 @@ void	init_queue(t_queue *q);
 bool	is_outside(t_mapi *map, int x, int y);
 void	init_map_info(t_mapi *map);
 char	*ft_itoa(int n);
+bool	invalid_char(char param);
 //allocated memory free
 void	ft_free_map_info(t_mapi *map);
 void	ft_free_queue(t_queue *q);
@@ -98,7 +102,7 @@ void	ft_free_queue(t_queue *q);
 bool	print_error(char *status);
 
 //window related fucntions
-void	manage_window(t_mapi *map);
+bool	manage_window(t_mapi *map);
 void	set_event(t_mapi *map);
 void	check_window(t_mapi *map, t_queue *cord, int mode);
 

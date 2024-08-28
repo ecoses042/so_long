@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include "../so_long.h"
 
-bool	dfs_end(t_mapv *param)
+bool	dfs_end(t_mapv *param, t_mapi *map)
 {
-	return (!param->exit && !param->score);
+	return (!param->exit || param->score != map->score_left);
 }
 
 bool	check_current(t_mapi *map, t_mapv *check_in, int i, int j)

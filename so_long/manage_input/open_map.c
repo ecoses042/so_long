@@ -27,6 +27,30 @@ char	*open_map_util(char *lines, char *line)
 	return (lines);
 }
 
+bool	is_invalid_lines(char *lines)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = -1;
+	while (lines[++i])
+	{
+		if (invalid_char(lines[i]))
+		{
+			count = 0;
+			j = i - 1;
+			while (invalid_char(lines[++j]))
+			{
+				count++;
+				if (count > 2)
+					return (true);
+			}
+		}
+	}
+	return (false);
+}
+
 char	**open_map(char *av)
 {
 	int		fd;
@@ -48,7 +72,9 @@ char	**open_map(char *av)
 		free(line);
 	}
 	close(fd);
-	result = ft_split(lines, '\n');
+	result = NULL;
+	if (!is_invalid_lines(lines))
+		result = ft_split(lines, '\n');
 	free(lines);
 	return (result);
 }

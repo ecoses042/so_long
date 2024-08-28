@@ -38,7 +38,7 @@ bool	bfs(t_mapi *map, t_queue *find_exit, t_mapv *check_condition)
 		put_poss_cord(map, find_exit, cord, check_condition);
 	}
 	ft_free_queue(find_exit);
-	return (dfs_end(check_condition));
+	return (dfs_end(check_condition, map));
 }
 
 bool	is_invalid_path(t_mapi *map_array)

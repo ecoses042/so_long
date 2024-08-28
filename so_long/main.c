@@ -21,7 +21,9 @@ int	main(int ac, char **av)
 		return (print_error(INVALID_FILE));
 	init_map_info(&map_array);
 	map_array.map = open_map(av[1]);
-	if (is_invalid_map(&map_array))
+	if (!map_array.map)
+		return (print_error(INVALID_FILE));
+	if (is_invalid_map(&map_array) || !map_array.map)
 	{
 		ft_free_map_info(&map_array);
 		return (1);

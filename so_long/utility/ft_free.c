@@ -16,7 +16,7 @@ void	ft_free_map_info(t_mapi *map)
 	int	i;
 
 	i = map->height - 1;
-	if (!map)
+	if (!map || !map->map)
 		return ;
 	while (++i <= map->height)
 		free(map->map[i]);

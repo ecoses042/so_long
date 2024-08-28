@@ -90,7 +90,7 @@ void	fill_window(t_mapi *map)
 	ft_free_queue(&cord);
 }
 
-void	manage_window(t_mapi *map)
+bool	manage_window(t_mapi *map)
 {
 	int	map_height;
 	int	map_width;
@@ -99,7 +99,14 @@ void	manage_window(t_mapi *map)
 	map_width = (map->width + 1) * MAP_SIZE;
 	map->mlx = mlx_init();
 	map->win = mlx_new_window(map->mlx, map_width, map_height, "./so_long");
+	if (!map->win || !map->mlx)
+	{
+		ft_free_map_info(map);
+		print_error(MLX_ERR);
+		return (false);
+	}
 	fill_window(map);
 	set_event(map);
 	mlx_loop(map->mlx);
+	return (true);
 }

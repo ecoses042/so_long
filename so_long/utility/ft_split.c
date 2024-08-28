@@ -27,7 +27,7 @@ static char	**stringnum(char const *s, char c)
 	i = 0;
 	count = 0;
 	if (!s)
-		return (0);
+		return (NULL);
 	while (s[i])
 	{
 		while (s[i] && !issep(s[i], c))
