@@ -4,10 +4,10 @@
  the main objective of this project is to create a simple game with players, collectables, and exit.
  it will also display number of movement in the terminal during the game.
 
-map file has to be formatted to .ber form.\n
-0 for air\n
-1 for wall\n
-P for starting posistion\n
+map file has to be formatted to .ber form.
+0 for air
+1 for wall
+P for starting posistion
 E for exit
 C for collectable
 
